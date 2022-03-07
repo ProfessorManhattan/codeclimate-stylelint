@@ -92,6 +92,46 @@ Before commiting your changes run the tests!
 
 Something else, please open an issue.
 
+## ➤ Example Usage
+
+The Code Climate engine built using this repository can be used for analysis using code climate cli. 
+
+```shell
+codeclimate analyze
+```
+
+This allows you to run code climate analysis from the root of  your project directory. Ensure `.codeclimate.yml` file is present on the root of your project directory. A sample configuration of this file  is present in this repository.Once the analysis is complete it will display the results in code climate format.
+
+If you have created the docker image locally and wish to test it you can do so using below command
+
+```shell
+codeclimate analyze --dev
+```
+In order to run slim docker image of this engine , please pull the latest slim docker image locally ( or create one ) and retag it to latest before running the same.
+
+
+
+### Building the Docker Container
+
+Run the below make command from the root of this repository to create a local fat docker image
+```shell
+make image
+```
+
+### Building a Slim Container
+
+Run the below make command from the root of this repository to create a local slim docker image
+```shell
+make slim
+```
+
+
+### Test
+
+Run the below command from the root of this repository to test the images created by this repository.
+```shell
+make test
+```
 ## Need help?
 
 For help with stylelint, [check out their documentation](http://stylelint.io/).

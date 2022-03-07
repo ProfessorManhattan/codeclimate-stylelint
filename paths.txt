@@ -1,0 +1,5 @@
+/usr/bin/node
+/usr/bin/npm
+/usr/src/app/node_modules/stylelint
+/usr/src/app/node_modules/stylelint-config-standard
+/usr/src/app/node_modules/stylelint-csstree-validator

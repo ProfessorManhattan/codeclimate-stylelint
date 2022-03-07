@@ -1,13 +1,9 @@
 ---
 version: "2"
 plugins:
-  eslint:
+  stylelint:
     enabled: true
-    channel: eslint-4
-    checks:
-      import/no-unresolved:
-        enabled: false
 exclude_patterns:
   - ".tmp_rules/"
   - "node_modules/"
-  - "test/"
+  #- "test/"
