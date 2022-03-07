@@ -2,8 +2,8 @@
   "name": "stylelint",
   "description": "Enforce consistent conventions and avoid errors in your stylesheets.",
   "maintainer": {
-    "name": "Gil Barbara",
-    "email": "gilbarbara@gmail.com"
+    "name": "Brian Zalewski",
+    "email": "brian@megabyte.space"
   },
   "languages" : ["CSS", "Less", "SCSS", "SugarSS", "JavaScript", "TypeScript"],
   "version": "13.7.2",

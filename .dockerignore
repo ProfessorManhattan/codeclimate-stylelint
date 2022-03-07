@@ -1,5 +1,6 @@
 .git
 .idea
+.codeclimate.yml
 Dockerfile
 Makefile
 node_modules
