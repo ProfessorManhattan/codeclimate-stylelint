@@ -1,9 +1,0 @@
----
-version: "2"
-plugins:
-  stylelint:
-    enabled: true
-exclude_patterns:
-  - ".tmp_rules/"
-  - "node_modules/"
-  #- "test/"

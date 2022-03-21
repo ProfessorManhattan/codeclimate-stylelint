@@ -1,0 +1,199 @@
+{
+    "name": "stylelint-demo",
+    "version": "0.0.0",
+    "private": true,
+    "description": "Stylelint Demo",
+    "repository": "stylelint/stylelint-demo",
+    "license": "MIT",
+    "main": "index.js",
+    "scripts": {
+      "prebundle": "rimraf dist",
+      "bundle": "NODE_ENV=production webpack --config webpack.config.prod.js",
+      "format": "prettier . --write",
+      "heroku-postbuild": "npm run bundle",
+      "lint": "npm-run-all --parallel lint:*",
+      "lint:css": "stylelint src/common/**/*.css",
+      "lint:formatting": "prettier . --check",
+      "lint:js": "eslint . --ignore-path .gitignore",
+      "lint:md": "remark . --quiet --frail --ignore-path .gitignore",
+      "prepare": "husky install",
+      "start": "NODE_ENV=production node index.js",
+      "start-dev": "NODE_ENV=development nodemon --ignore src/common/ index.js",
+      "test": "jest",
+      "posttest": "npm run bundle"
+    },
+    "lint-staged": {
+      "*.css": "stylelint --cache --fix",
+      "*.js": "eslint --cache --fix",
+      "*.{css,js,json,md,yml}": "prettier --write"
+    },
+    "babel": {
+      "presets": [
+        "@babel/preset-env",
+        "@babel/preset-react"
+      ]
+    },
+    "browserslist": [
+      "defaults"
+    ],
+    "prettier": "@stylelint/prettier-config",
+    "eslintConfig": {
+      "parserOptions": {
+        "sourceType": "module"
+      },
+      "settings": {
+        "react": {
+          "version": "detect"
+        }
+      },
+      "plugins": [
+        "react",
+        "react-hooks"
+      ],
+      "extends": [
+        "stylelint",
+        "plugin:react/recommended"
+      ],
+      "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "node/no-unsupported-features/es-syntax": [
+          "error",
+          {
+            "ignores": [
+              "modules"
+            ]
+          }
+        ]
+      },
+      "globals": {
+        "__dirname": true,
+        "exports": true,
+        "module": true,
+        "require": true
+      },
+      "root": true
+    },
+    "remarkConfig": {
+      "plugins": [
+        "@stylelint/remark-preset"
+      ]
+    },
+    "stylelint": {
+      "plugins": [
+        "stylelint-order"
+      ],
+      "extends": "stylelint-config-standard",
+      "rules": {
+        "at-rule-allowed-list": [
+          "import",
+          "media"
+        ],
+        "color-named": "always-where-possible",
+        "font-weight-notation": "numeric",
+        "function-allowed-list": [
+          "color",
+          "counter",
+          "hsl",
+          "linear-gradient"
+        ],
+        "order/properties-alphabetical-order": true,
+        "property-no-unknown": [
+          true,
+          {
+            "ignoreProperties": [
+              "composes"
+            ]
+          }
+        ],
+        "selector-class-pattern": "^([a-z]+[a-zA-Z]*|ng-[a-z]+(-[a-z]+)*)$",
+        "selector-max-attribute": 0,
+        "selector-max-class": 3,
+        "selector-max-type": 0,
+        "selector-max-universal": 0,
+        "selector-pseudo-class-allowed-list": [
+          "hover",
+          "focus",
+          "global"
+        ],
+        "selector-pseudo-class-no-unknown": null,
+        "unit-allowed-list": [
+          "%",
+          "deg",
+          "px",
+          "em",
+          "vh"
+        ]
+      }
+    },
+    "jest": {
+      "testEnvironment": "node"
+    },
+    "dependencies": {
+      "@babel/cli": "^7.17.6",
+      "@babel/core": "^7.17.7",
+      "@babel/preset-env": "^7.16.11",
+      "@babel/preset-react": "^7.16.7",
+      "babel-loader": "^8.2.3",
+      "body-parser": "^1.19.2",
+      "classnames": "^2.3.1",
+      "compression": "^1.7.4",
+      "css-loader": "^6.7.1",
+      "express": "^4.17.3",
+      "html-webpack-plugin": "^5.5.0",
+      "lz-string": "^1.4.4",
+      "morgan": "^1.10.0",
+      "postcss": "^8.4.12",
+      "postcss-html": "^1.3.0",
+      "postcss-less": "^6.0.0",
+      "postcss-loader": "^6.2.1",
+      "postcss-nesting": "^10.1.3",
+      "postcss-sass": "^0.5.0",
+      "postcss-scss": "^4.0.3",
+      "prismjs": "^1.27.0",
+      "prop-types": "^15.8.1",
+      "react": "^17.0.2",
+      "react-css-modules": "^4.7.11",
+      "react-dom": "^17.0.2",
+      "react-simple-code-editor": "0.11.0",
+      "rimraf": "^3.0.2",
+      "serve-favicon": "^2.5.0",
+      "style-loader": "^3.3.1",
+      "stylelint": "^14.6.0",
+      "stylelint-config-recommended": "^7.0.0",
+      "stylelint-config-standard": "^25.0.0",
+      "sugarss": "^4.0.1",
+      "use-debounce": "^7.0.1",
+      "webpack": "^5.70.0",
+      "whatwg-fetch": "^3.6.2"
+    },
+    "devDependencies": {
+      "@stylelint/prettier-config": "^2.0.0",
+      "@stylelint/remark-preset": "^3.0.0",
+      "eslint": "~8.11.0",
+      "eslint-config-stylelint": "~15.0.0",
+      "eslint-plugin-react": "~7.29.4",
+      "eslint-plugin-react-hooks": "~4.3.0",
+      "husky": "^7.0.4",
+      "jest": "^27.5.1",
+      "lint-staged": "^12.3.6",
+      "nodemon": "^2.0.15",
+      "npm-run-all": "^4.1.5",
+      "prettier": "^2.6.0",
+      "remark-cli": "^10.0.1",
+      "stylelint-order": "^5.0.0",
+      "supertest": "^6.2.2",
+      "webpack-cli": "^4.9.2",
+      "webpack-dev-middleware": "^5.3.1",
+      "webpack-hot-middleware": "^2.25.1"
+    },
+    "engines": {
+      "node": "16"
+    },
+    "postcss": {
+      "map": true,
+      "plugins": {
+        "postcss-nesting": {}
+      }
+    }
+  }
+  

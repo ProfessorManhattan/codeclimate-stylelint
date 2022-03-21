@@ -1,20 +1,19 @@
-FROM mhart/alpine-node:10
+FROM node:alpine
 
-WORKDIR /usr/src/app
-COPY package.json package-lock.json /usr/src/app/
-COPY engine.json /
-RUN npm install
+WORKDIR /work
 
-RUN adduser -u 9000 -D app
-COPY . /usr/src/app
-RUN chown -R app:app /usr/src/app
+COPY local/config /usr/local/src/codeclimate-config
+COPY local/codeclimate-stylelint /usr/local/bin/codeclimate-stylelint
+
+RUN adduser --uid 9000 --gecos "" --disabled-password app \
+    && npm install -g stylelint
 
 USER app
 
 VOLUME /code
 WORKDIR /code
 
-CMD ["node", "/usr/src/app/bin/codeclimate-stylelint.js"]
+CMD ["codeclimate-stylelint"]
 
 ARG BUILD_DATE
 ARG REVISION
@@ -23,12 +22,25 @@ ARG VERSION
 LABEL maintainer="Megabyte Labs <help@megabyte.space>"
 LABEL org.opencontainers.image.authors="Brian Zalewski <brian@megabyte.space>"
 LABEL org.opencontainers.image.created=$BUILD_DATE
-LABEL org.opencontainers.image.description="Code Climate engine for Stylelint"
-LABEL org.opencontainers.image.documentation="https://gitlab.com/megabyte-labs/docker/codeclimate/stylelint/-/blob/master/README.md"
+LABEL org.opencontainers.image.description="A slim Stylelint standalone linter and a CodeClimate engine for GitLab CI"
+LABEL org.opencontainers.image.documentation="https://github.com/ProfessorManhattan/codeclimate-stylelint/blob/master/README.md"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.revision=$REVISION
 LABEL org.opencontainers.image.source="https://gitlab.com/megabyte-labs/docker/codeclimate/stylelint.git"
 LABEL org.opencontainers.image.url="https://megabyte.space"
 LABEL org.opencontainers.image.vendor="Megabyte Labs"
 LABEL org.opencontainers.image.version=$VERSION
-LABEL space.megabyte.type="code-climate"
+LABEL space.megabyte.type="codeclimate"
+
+FROM codeclimate AS stylelint
+
+WORKDIR /work
+
+USER root
+
+RUN rm /engine.json /usr/local/bin/codeclimate-stylelint /usr/local/src/codeclimate-config
+
+ENTRYPOINT ["stylelint"]
+CMD ["--version"]
+
+LABEL space.megabyte.type="linter"
