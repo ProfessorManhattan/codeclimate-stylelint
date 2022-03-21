@@ -73,7 +73,7 @@
     "node": ">=14.18.0"
   },
   "publishConfig": {
-    "@megabyte:registry": "https://gitlab.com/api/v4/projects//packages/npm/",
+    "@megabyte:registry": "https://gitlab.com/api/v4/projects/32219003/packages/npm/",
     "access": "public"
   },
   "blueprint": {
@@ -90,6 +90,9 @@
       "codeclimate": "--http-probe=false --exec 'cp -rf /work/* /code && codeclimate-stylelint' --workdir '/work' --preserve-path-file 'local/paths.txt' --mount \"$PWD/test/output-package:/work\"",
       "stylelint": "--http-probe=false --exec 'stylelint --version && npx --version && npm --version' --preserve-path-file 'local/paths.txt'"
     },
+    "github_id": "R_kgDOHCkQeQ",
+    "gitlab_group_id": "14556970",
+    "gitlab_project_id": "32219003",
     "group": "docker",
     "name": "Stylelint",
     "overview": "This project is the home of a **[Stylelint](https://stylelint.io/)** [CodeClimate](https://codeclimate.com/) engine. It was built to integrate Stylelint results into the GitLab merge request web UI. This project also builds a slim, standalone Stylelint linter which can be used in conjunction with the CodeClimate engine or in places where CodeClimate engine results are not required.",
@@ -118,11 +121,11 @@
     ],
     "helpUrl": "https://megabyte.space/docs/contributing/commits"
   },
-  "engine": "node >= 0.12.4",
   "eslintConfig": {
     "extends": "eslint-config-strict-mode",
     "ignorePatterns": [
       "docs/**/*",
+      "local/config/**/*",
       "test/**/*"
     ],
     "rules": {}
